@@ -15,8 +15,6 @@ namespace Application.Commands
         public ConfigureModelMaps()
         {
             CreateMap<CreateProduct.Request, Product>();
-            //CreateMap<PatchProduct.Request, Product>();
-
             CreateMap<CreateUser.Request, User>();
         }
     }

@@ -36,6 +36,8 @@ namespace Application.Commands.V1.User
 
             var user = _mapper.Map<Repositories.Models.User>(request);
 
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
             try
             { 
                 await _userRepository.Add(user);

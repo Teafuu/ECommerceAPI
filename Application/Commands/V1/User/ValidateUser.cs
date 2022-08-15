@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Repositories.Interfaces;
-using Repositories.Models;
+using BCrypt.Net;
 
 namespace Application.Commands.V1.User
 {
@@ -35,11 +30,18 @@ namespace Application.Commands.V1.User
             if(request?.Email is null || request?.Password is null)
                 return await Task.FromResult(new Response { Success = false, Error = "Invalid Arguments"});
 
-            var validation = await _userRepository
-                .GetByExpression(x => x.Email.ToLower() == request.Email.ToLower() 
-                                      && x.Password == request.Password);
+            var getUser = await _userRepository.GetByExpression(x => x.Email.ToLower() == request.Email.ToLower());
 
-            return await Task.FromResult(new Response {Success = validation != null});
+            if (getUser is null)
+            {
+                return await GetErrorResponse("User doesn't exist");
+            }
+
+            var validation = BCrypt.Net.BCrypt.Verify(request.Password, getUser.Password);
+            
+            return await Task.FromResult(new Response {Success = validation});
         }
+        public async Task<Response> GetErrorResponse(string exception) =>
+            await Task.FromResult(new Response { Success = false, Error = exception });
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Reflection;
+﻿using Application.Commands.V1.Order;
 using Application.Commands.V1.Product;
 using Application.Commands.V1.User;
 using AutoMapper;
+using ECommerceAPI.Models.Dto.Request.Order;
 using ECommerceAPI.Models.Dto.Request.Product;
 using ECommerceAPI.Models.Dto.Request.User;
 
@@ -16,6 +17,8 @@ namespace ECommerceAPI
 
             CreateMap<CreateProductRequest, CreateProduct.Request>();
             CreateMap<PatchProductRequest, PatchProduct.Request>();
+
+            CreateMap<CreateOrderRequest, CreateOrder.Request>();
         }
     }
 }

@@ -33,7 +33,6 @@ namespace Application.Commands.V1.User
             if (request is null)
                 return await GetErrorResponse("Request is null");
 
-
             var user = _mapper.Map<Repositories.Models.User>(request);
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);

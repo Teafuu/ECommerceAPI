@@ -1,11 +1,9 @@
-using System.Reflection;
-using System.Xml.Xsl;
 using Application;
 using Application.Commands;
-using AutoMapper;
 using ECommerceAPI;
-using Repositories;
 using MediatR;
+using Repositories;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

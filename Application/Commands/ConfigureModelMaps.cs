@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Commands.V1.Order;
+﻿using Application.Commands.V1.Order;
 using Application.Commands.V1.Product;
 using Application.Commands.V1.User;
 using AutoMapper;

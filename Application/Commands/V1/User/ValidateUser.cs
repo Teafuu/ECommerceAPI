@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Repositories.Interfaces;
-using BCrypt.Net;
 
 namespace Application.Commands.V1.User
 {

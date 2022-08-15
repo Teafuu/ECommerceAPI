@@ -21,6 +21,7 @@ namespace Repositories
             
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Product>, ProductRepository>();
+            services.AddScoped<IRepository<Order>, OrderRepository>();
 
             return services;
         }

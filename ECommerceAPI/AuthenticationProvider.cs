@@ -15,7 +15,7 @@
 
         public Guid CreateToken(int userId)
         {
-            var token = new Guid();
+            var token = Guid.NewGuid();
             _tokenHandler.Add(token, new KeyValuePair<int, DateTime>(userId, DateTime.Now));
             return token;
         }

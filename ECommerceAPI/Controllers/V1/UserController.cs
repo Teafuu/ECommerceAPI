@@ -16,7 +16,11 @@ namespace ECommerceAPI.Controllers.V1
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public UserController(ILogger<UserController> logger, AuthenticationProvider authenticationProvider, IMapper mapper, IMediator mediator)
+        public UserController(
+            ILogger<UserController> logger,
+            AuthenticationProvider authenticationProvider,
+            IMapper mapper,
+            IMediator mediator)
         {
             _logger = logger;
             _authenticationProvider = authenticationProvider;

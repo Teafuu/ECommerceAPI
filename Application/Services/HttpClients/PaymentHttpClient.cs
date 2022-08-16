@@ -22,7 +22,6 @@ namespace Application.Services
             _client = client;
         }
 
-
         public async Task<ClientResult<TransactionResponse>> PostTransaction(TransactionRequest request, CancellationToken token)
         {
             var httpContent = new StringContent(JsonConvert.SerializeObject(request));

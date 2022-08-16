@@ -12,12 +12,14 @@ namespace ECommerceAPI.Controllers.V1
     public class UserController : ControllerBase
     {
         private readonly ILogger<UserController> _logger;
+        private readonly AuthenticationProvider _authenticationProvider;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public UserController(ILogger<UserController> logger, IMapper mapper, IMediator mediator)
+        public UserController(ILogger<UserController> logger, AuthenticationProvider authenticationProvider, IMapper mapper, IMediator mediator)
         {
             _logger = logger;
+            _authenticationProvider = authenticationProvider;
             _mapper = mapper;
             _mediator = mediator;
         }
@@ -30,7 +32,8 @@ namespace ECommerceAPI.Controllers.V1
             try
             {
                 var result = await _mediator.Send(command, cancellationToken);
-                return Ok(result);
+                var token = _authenticationProvider.CreateToken(result.Id);
+                return Ok(token);
 
             }
             catch (ExeuctionFailedException ex)

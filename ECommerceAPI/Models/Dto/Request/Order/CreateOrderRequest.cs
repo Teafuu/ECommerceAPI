@@ -4,7 +4,7 @@ namespace ECommerceAPI.Models.Dto.Request.Order
 {
     public class CreateOrderRequest
     {
-        [Required] public int UserId { get; set; }
+        [Required] public Guid Token { get; set; }
         [Required] public ICollection<int>? ProductIds { get; set; }
         [Required] public string? Address { get; set; }
         [Required] public string CardNumber { get; set; }

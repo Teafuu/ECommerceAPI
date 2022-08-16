@@ -12,12 +12,18 @@ namespace ECommerceAPI.Controllers.V1
     public class ProductController : ControllerBase
     {
         private readonly ILogger<ProductController> _logger;
+        private readonly AuthenticationProvider _authenticationProvider;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public ProductController(ILogger<ProductController> logger, IMapper mapper, IMediator mediator)
+        public ProductController(
+            ILogger<ProductController> logger, 
+            AuthenticationProvider authenticationProvider,
+            IMapper mapper, 
+            IMediator mediator)
         {
             _logger = logger;
+            _authenticationProvider = authenticationProvider;
             _mapper = mapper;
             _mediator = mediator;
         }
@@ -25,8 +31,13 @@ namespace ECommerceAPI.Controllers.V1
         [HttpPost(Name = "CreateProduct")]
         public async Task<IActionResult> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken)
         {
-            var command = _mapper.Map<CreateProduct.Request>(request);
+            var userId = _authenticationProvider.GetUserId(request.Token);
 
+            if (userId < 0)
+                return BadRequest("Invalid Token");
+
+            var command = _mapper.Map<CreateProduct.Request>(request);
+            
             try
             {
                 var result = await _mediator.Send(command, cancellationToken);

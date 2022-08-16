@@ -12,8 +12,7 @@ namespace Repositories
         public ECommerceContext(DbContextOptions<ECommerceContext> options)
             : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+
         }
     }
 }

@@ -12,12 +12,18 @@ namespace ECommerceAPI.Controllers.V1
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;
+        private readonly AuthenticationProvider _authenticationProvider;
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
 
-        public OrderController(ILogger<OrderController> logger, IMapper mapper, IMediator mediator)
+        public OrderController(
+            ILogger<OrderController> logger,
+            AuthenticationProvider authenticationProvider,
+            IMapper mapper,
+            IMediator mediator)
         {
             _logger = logger;
+            _authenticationProvider = authenticationProvider;
             _mapper = mapper;
             _mediator = mediator;
         }
@@ -25,7 +31,13 @@ namespace ECommerceAPI.Controllers.V1
         [HttpPost(Name = "CreateOrder")]
         public async Task<IActionResult> CreateOrder(CreateOrderRequest request, CancellationToken cancellationToken)
         {
+            var userId = _authenticationProvider.GetUserId(request.Token);
+
+            if (userId < 0)
+                return BadRequest("Token is invalid");
+
             var command = _mapper.Map<CreateOrder.Request>(request);
+            command.UserId = userId;
 
             try
             {

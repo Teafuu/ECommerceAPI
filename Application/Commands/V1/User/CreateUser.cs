@@ -19,6 +19,7 @@ namespace Application.Commands.V1.User
         public class Response 
         {
             public bool Success { get; set; }
+            public int Id { get; set; }
             public string Error { get; set; } = string.Empty;
         }
 
@@ -39,8 +40,9 @@ namespace Application.Commands.V1.User
 
             try
             { 
-                await _userRepository.Add(user);
-                return await Task.FromResult(new Response { Success = true });
+                var result = await _userRepository.Add(user);
+                
+                return await Task.FromResult(new Response { Success = true, Id = result.Id});
 
             }
             catch (ArgumentException ex)

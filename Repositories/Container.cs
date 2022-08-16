@@ -11,7 +11,7 @@ namespace Repositories
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddDbContext<ECommerceContext>(
-                options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ECommerceAPI.Data;Trusted_Connection=True;MultipleActiveResultSets=true"));
+                options => options.UseSqlServer(@"Server=.\SQLExpress;Database=ECommerceAPI.Data;Trusted_Connection=True;MultipleActiveResultSets=true"));
             
             services.AddScoped<IRepository<User>, UserRepository>();
             services.AddScoped<IRepository<Product>, ProductRepository>();

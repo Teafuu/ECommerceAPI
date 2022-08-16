@@ -16,6 +16,7 @@ builder.Services.AddAutoMapper(cfg => {
     cfg.AddProfile<ConfigureModelMaps>();
     cfg.AddProfile<ConfigureRequestMaps>();
 });
+builder.Services.AddSingleton<AuthenticationProvider>();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();

@@ -23,7 +23,7 @@ namespace ECommerceAPI.Controllers.V1
         }
 
         [HttpPost(Name = "CreateOrder")]
-        public async Task<IActionResult> CreateProduct(CreateOrderRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateOrder(CreateOrderRequest request, CancellationToken cancellationToken)
         {
             var command = _mapper.Map<CreateOrder.Request>(request);
 

@@ -1,14 +1,16 @@
-﻿namespace ECommerceAPI.Models.Dto.Request.Order
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ECommerceAPI.Models.Dto.Request.Order
 {
     public class CreateOrderRequest
     {
-        public int UserId { get; set; }
-        public ICollection<int>? ProductIds { get; set; }
-        public string? Address { get; set; }
-        public string CardNumber { get; set; }
-        public string ExpiryMonth { get; set; }
-        public string ExpiryYear { get; set; }
-        public string Cvv { get; set; }
+        [Required] public int UserId { get; set; }
+        [Required] public ICollection<int>? ProductIds { get; set; }
+        [Required] public string? Address { get; set; }
+        [Required] public string CardNumber { get; set; }
+        [Required] public string ExpiryMonth { get; set; }
+        [Required] public string ExpiryYear { get; set; }
+        [Required] public string Cvv { get; set; }
     }
 
  
